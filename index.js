@@ -1,10 +1,13 @@
 var app = require('express')();
+var express = require('express');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/views/index.html');
 });
+
+app.use("/img", express.static(__dirname + '/img'));
 
 io.on('connection', function(socket){
 	var userName = 'Anonymous';
