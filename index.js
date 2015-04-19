@@ -1,7 +1,8 @@
-var app = require('express')();
 var express = require('express');
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var path = require('path');
+var app = express();
+var server = require('http').createServer(app).listen(process.env.PORT || 3000);
+var io = require('socket.io').listen(server);
 
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/views/index.html');
@@ -17,6 +18,6 @@ io.on('connection', function(socket){
 	});
 });
 
-http.listen(3000, function(){
-	console.log('listening on *:3000');
-});
+// http.listen(3000, function(){
+// 	console.log('listening on *:3000');
+// });
